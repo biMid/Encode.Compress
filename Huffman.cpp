@@ -156,5 +156,25 @@ int main() {
   cout << "Decoding Time: " << culculateTime(start, end) / 100.0 << " ms"
        << endl;
 
+  // 输出霍夫曼编码结果到文件
+  ofstream encodedFile("encodedText.txt");
+  if (!encodedFile.is_open()) {
+    cerr << "Failed to open encoded file." << endl;
+    return 1;
+  }
+  encodedFile << encodedText << endl;
+  encodedFile.close();
+
+  // 输出霍夫曼编码表到文件
+  ofstream huffmanCodeFile("huffmanCode.txt");
+  if (!huffmanCodeFile.is_open()) {
+    cerr << "Failed to open huffman code file." << endl;
+    return 1;
+  }
+  for (const auto &pair : huffmanCode) {
+    huffmanCodeFile << pair.first << " -> " << pair.second << endl;
+  }
+  huffmanCodeFile.close();
+
   return 0;
 }

@@ -98,6 +98,13 @@ string lz78Encode(const string &input) {
     encodedBits += indexBits + pair.second;
   }
 
+  // 输出字典的内容到文件
+  ofstream dictionaryFile("dictionary.txt");
+  for (const auto &pair : dictionary) {
+    dictionaryFile << pair.first << " -> " << pair.second << endl;
+  }
+  dictionaryFile.close();
+
   return encodedBits;
 }
 
@@ -188,5 +195,24 @@ int main() {
   cout << "Decoding Time: " << culculateTime(start, end) / 100.0 << " ms"
        << endl;
 
+  // 输出符号表到文件
+  ofstream outputFile("symbolTable.txt");
+  if (!outputFile.is_open()) {
+    cerr << "Failed to open output file." << endl;
+    return 1;
+  }
+  for (const auto &pair : symbolTable) {
+    outputFile << pair.first << " -> " << pair.second << endl;
+  }
+  outputFile.close();
+
+  // 输出编码结果到文件 
+  ofstream encodedFile("encodedText.txt");
+  if (!encodedFile.is_open()) {
+    cerr << "Failed to open encoded file." << endl;
+    return 1;
+  }
+  encodedFile << encodedText << endl;
+  encodedFile.close();
   return 0;
 }

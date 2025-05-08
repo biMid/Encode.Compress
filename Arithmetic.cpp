@@ -206,12 +206,6 @@ std::string arithmetic_decode(const std::string &encoded_bits) {
   while (true) {
     uint64_t current_range = dec_high - dec_low + 1;
 
-    // 找到当前代码值在总频率范围内的位置
-    // ((value_in_interval - interval_low) * total_counts_in_model) /
-    // interval_range
-    // 注意：如果dec_low和dec_high是包含的，则current_range需要加1
-    // 这里，dec_low和dec_high定义了一个包含的范围[dec_low, dec_high]，
-    // 缩放值表示在累积频率分布中的一个点。
     uint64_t search_target_freq =
         ((dec_current_code_value - dec_low) * total_frequency_count_global) /
         current_range;
@@ -305,5 +299,13 @@ int main() {
   std::cout << "Decoding Time: " << culculateTime(start, end) / 100.0 << " ms"
             << std::endl;
 
+  // 输出编码结果到文件
+  std::ofstream encodedFile("encodedText.txt");
+  if (!encodedFile.is_open()) {
+    std::cerr << "Failed to open encoded file." << std::endl;
+    return 1;
+  }
+  encodedFile << compressed_bits << std::endl;
+  encodedFile.close();
   return 0;
 }
