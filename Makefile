@@ -7,7 +7,7 @@ LZ:LZ.cpp
 	./LZ.o
 
 Arithmetic:Arithmetic.cpp
-	g++ -o Arithmetic.o Arithmetic.cpp -lgmp -lgmpxx
+	g++ -o Arithmetic.o Arithmetic.cpp
 	./Arithmetic.o
 
 .PHONY: clean

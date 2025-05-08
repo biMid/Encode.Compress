@@ -36,7 +36,7 @@ void printCodes(Node *root, string str,
   printCodes(root->right, str + "1", huffmanCode); // 递归遍历右子树，编码加'1'
 }
 
-// 编码字符串为霍夫曼编码
+
 string encode(string text, unordered_map<char, string> &huffmanCode) {
   string encodedText = ""; // 初始化编码后的字符串
   for (char ch : text) {
@@ -45,7 +45,6 @@ string encode(string text, unordered_map<char, string> &huffmanCode) {
   return encodedText;
 }
 
-// 解码霍夫曼编码为原字符串
 string decode(Node *root, string encodedText) {
   string decodedText = ""; // 初始化解码后的字符串
   Node *curr = root;       // 当前节点指向根节点
